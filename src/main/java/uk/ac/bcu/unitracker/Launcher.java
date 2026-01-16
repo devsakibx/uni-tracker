@@ -2,7 +2,9 @@ package uk.ac.bcu.unitracker;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import uk.ac.bcu.unitracker.admin.AdminController;
@@ -21,6 +23,7 @@ public class Launcher extends Application {
 
         Button studentBtn = new Button("Open Student Client");
         Button adminBtn = new Button("Open Admin/Tutor Client");
+        Button aboutBtn = new Button("About");
 
         studentBtn.setOnAction(e -> {
             Stage s = new Stage();
@@ -38,11 +41,28 @@ public class Launcher extends Application {
             s.show();
         });
 
-        VBox root = new VBox(10, studentBtn, adminBtn);
+        aboutBtn.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("About UniTracker");
+            alert.setHeaderText("UniTracker");
+            alert.setContentText(
+                    "Version: 1.0.0\n" +
+                            "Storage: data/assignments.csv\n" +
+                            "Clients: Student + Admin/Tutor"
+            );
+            alert.showAndWait(); // shows informational dialog [web:217]
+        });
+
+        VBox root = new VBox(10,
+                new Label("Choose a client:"),
+                studentBtn,
+                adminBtn,
+                aboutBtn
+        );
         root.setStyle("-fx-padding: 20;");
 
         stage.setTitle("UniTracker - Start");
-        stage.setScene(new Scene(root, 320, 140));
+        stage.setScene(new Scene(root, 320, 190));
         stage.show();
     }
 
