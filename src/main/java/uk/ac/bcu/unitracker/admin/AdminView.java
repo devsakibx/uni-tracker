@@ -20,6 +20,7 @@ public class AdminView {
     final Button applyFilterBtn = new Button("Apply Filter");
     final Button clearFilterBtn = new Button("Clear Filter");
     final Button refreshBtn = new Button("Refresh");
+    final Button exportBtn = new Button("Export CSV...");
 
     public AdminView() {
         root.setPadding(new Insets(10));
@@ -60,6 +61,7 @@ public class AdminView {
         top.add(applyFilterBtn, 4, 0);
         top.add(clearFilterBtn, 5, 0);
         top.add(refreshBtn, 6, 0);
+        top.add(exportBtn, 7, 0);
 
         root.setTop(top);
         root.setCenter(table);
