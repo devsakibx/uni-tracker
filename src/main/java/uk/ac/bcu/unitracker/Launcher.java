@@ -48,7 +48,8 @@ public class Launcher extends Application {
             alert.setContentText(
                     "Version: 1.0.0\n" +
                             "Storage: data/assignments.csv\n" +
-                            "Clients: Student + Admin/Tutor"
+                            "Clients: Student + Admin/Tutor\n +
+                            "developed by Salman | 2026"
             );
             alert.showAndWait(); // shows informational dialog [web:217]
         });
