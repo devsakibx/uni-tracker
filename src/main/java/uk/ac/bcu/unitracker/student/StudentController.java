@@ -3,6 +3,7 @@ package uk.ac.bcu.unitracker.student;
 import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import uk.ac.bcu.unitracker.domain.enums.AssignmentStatus;
 import uk.ac.bcu.unitracker.service.TrackerService;
 
@@ -98,8 +99,22 @@ public class StudentController {
             showError("Select an assignment first.");
             return;
         }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm delete");
+        confirm.setHeaderText("Delete assignment " + id + "?");
+        confirm.setContentText("This action cannot be undone.");
+        var result = confirm.showAndWait();  // returns Optional<ButtonType> [web:217]
+
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            return; // cancelled [web:220]
+        }
+
         try {
             service.deleteAssignment(id);
+            view.selectedIdField.clear();
+            view.notesArea.clear();
+            view.statusBox.setValue(null);
             refreshTable();
         } catch (Exception ex) {
             showError("Delete failed: " + ex.getMessage());
